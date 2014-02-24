@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- The plate -->
+	<title>GEERS</title>
+	<meta name="description" content="media, geaphic design, web sites." />
+    <meta name="author" content="Jody Jacobus Geers" />
+	
+	<!-- The meat -->
+	<script src="lib/Three.js"></script>
+	<script src="lib/Detector.js"></script>
+	<script src="lib/OrbitControls.js"></script>
+	<script src="lib/THREEx.KeyboardState.js"></script>
+	<script src="lib/THREEx.FullScreen.js"></script>
+	<script src="lib/THREEx.WindowResize.js"></script>
+	
+	<!-- The salad -->
+	<link href="build/css.css" rel="stylesheet" />
+</head>
+<body>
+
+	<!-- 3D World -->
+	<div id="stage"></div>
+	
+	<!-- Pages -->
+	<div id="impress">
+		<div id="Home" class="step" data-x="-1000" data-y="-1000" data-z="-1000">
+		</div>
+		
+		<div id="About" class="step jjg-step" data-x="0" data-y="0" data-z="0" data-rotate="360" data-scale="5">
+			<img src="bin/geers/logo.png" class="image-center" />
+			<h1>About Us</h1>
+			<span class="jjg-step-text">
+				text
+			</span>
+		</div>
+		
+		<div id="Contact" class="step jjg-step" data-x="10000" data-y="10000" data-z="10000" data-rotate="720" data-scale="10">
+			<h1>Contact Us</h1>
+			<span class="jjg-step-text">
+				Do you have a query, proposition, something interesting to lighten up Monday?<br/>
+				Then please, don’t be shy, share below!<br/>
+			</span>
+		</div>
+	</div>
+	
+	<!-- Not the headder -->
+	<div id="footer">
+		<div id="footer-navigation">
+			<a href="#Home" class="margin-right-50">Home</a>
+			<a href="#About" class="margin-right-50">About</a>
+			<a href="#Contact">Contact</a>
+		</div>
+	</div>
+	
+	<!-- Pages init -->
+	<script src="lib/impress.js"></script>
+	<script>impress().init();</script>
+	
+	<!-- 3D World init -->
+	<script>
+		/*
+		* standard global variables
+		*/
+		var container, scene, camera, renderer, controls, stats;
+		var keyboard = new THREEx.KeyboardState();
+		var clock = new THREE.Clock();
+
+		
+		/*
+		* standard global variables
+		*/
+		var mesMesh, mirrorMesCubeCamera; // for mirror material
+
+		
+		/*
+		* Create the scene, start render.
+		*/
+		init();
+		animate();
+			
+		function init () {
+			// Scene
+			scene = new THREE.Scene();
+			
+			// Camera
+			var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+			var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 1, FAR = 20000;
+			camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR );
+			scene.add(camera);
+			camera.position.set(-6,8,10);
+			camera.lookAt(scene.position);	
+			
+			// Renderer
+			if ( Detector.webgl )
+				renderer = new THREE.WebGLRenderer( {antialias:true} );
+			else
+				renderer = new THREE.CanvasRenderer(); 
+			renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+			container = document.getElementById( 'stage' );
+			container.appendChild( renderer.domElement );
+			
+			// Events
+			THREEx.WindowResize(renderer, camera);
+			THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+			
+			// Controlls
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+			// Lights
+			var light = new THREE.PointLight(0xffffff);
+			light.position.set(0,250,0);
+			scene.add(light);
+			
+			// Skybox / fog
+			var materialArray = [];
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/px.png' ) }));
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/nx.png' ) }));
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/py.png' ) }));
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/ny.png' ) }));
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/pz.png' ) }));
+				materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'bin/sky-box/nz.png' ) }));
+			
+			for (var i = 0; i < 6; i++)
+				materialArray[i].side = THREE.BackSide;
+			   
+			var skyboxMaterial = new THREE.MeshFaceMaterial( materialArray );
+			var skyboxGeom = new THREE.CubeGeometry( 500, 500, 500, 1, 1, 1 );
+			var skybox = new THREE.Mesh( skyboxGeom, skyboxMaterial );
+			scene.add( skybox );	
+			
+			// Objects
+			var loader = new THREE.JSONLoader();
+			loader.load( "bin/logo-blender/logo.js", function ( geometry ) {
+				
+				mirrorMesCubeCamera = new THREE.CubeCamera( 0.1, 5000, 512 );
+				scene.add( mirrorMesCubeCamera );
+				
+				var mirrorMesCamera = new THREE.MeshBasicMaterial( { envMap: mirrorMesCubeCamera.renderTarget } );
+				
+				mesMesh = new THREE.Mesh( geometry, mirrorMesCamera );
+				scene.add( mesMesh );
+			});
+			
+			// Events
+			document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
+		}
+
+		
+		/*
+		* Event @Override
+		*/
+		function onDocumentMouseWheel( event ) {
+			event.preventDefault();
+		}
+
+		
+		/*
+		* Annimation Syntactic Sugar :)
+		*/
+		function animate () {
+			requestAnimationFrame( animate );
+			render();		
+			controls.update();
+		}
+
+		
+		/*
+		* Happy rendering! 
+		*/
+		function render () {
+			mirrorMesCubeCamera.updateCubeMap( renderer, scene );
+			renderer.render( scene, camera );
+		}
+	</script>
+</body>
+</html>

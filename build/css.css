@@ -1,0 +1,107 @@
+
+
+/*
+* Globals
+*/
+body {
+	overflow: hidden;
+	font-family: Arial Narrow, Arial, sans-serif;
+	font-weight: lighter;
+}
+
+h1 {
+	color: #5EB3FF;
+	font-weight: lighter;
+	font-size: 1.75em;
+}
+
+h2 {
+	color: #5EB3FF;
+	font-weight: lighter;
+	font-size: 1.5em;
+}
+
+a:link {
+	color: #5EB3FF;
+	text-decoration: none;
+} /* unvisited link */
+
+a:visited {
+	color: #5EB3FF;
+	text-decoration: none;
+} /* visited link */
+
+a:hover {
+	color: #5EB3FF;
+	text-decoration: underline;
+} /* mouse over link */
+
+a:active {
+	color: #5EB3FF;
+	text-decoration: none;
+} /* selected link */
+
+
+/*
+* World
+*/
+#stage {
+	position: absolute;
+	left:0px;
+	top:0px
+}
+
+
+/*
+* Footer
+*/
+#footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 50px;
+	background-color: #fff;
+}
+
+#footer-navigation {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 1.75em;
+}
+
+
+/*
+* Page
+*/
+.jjg-step {
+	width: 900px;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-khtml-border-radius: 20px;
+}
+
+.jjg-step-text {
+	color: #676768;
+	font-size: 1.25em;
+}
+
+
+/*
+* Element helpers
+*/
+.display-none {
+	display: none;
+}
+
+.margin-right-50 {
+	margin-right: 50px;
+}
+
+.image-center {
+	margin: auto;
+	display: block;
+}
