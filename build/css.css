@@ -24,23 +24,43 @@ h2 {
 a:link {
 	color: #5EB3FF;
 	text-decoration: none;
-} /* unvisited link */
+}
 
 a:visited {
 	color: #5EB3FF;
 	text-decoration: none;
-} /* visited link */
+}
 
 a:hover {
 	color: #5EB3FF;
 	text-decoration: underline;
-} /* mouse over link */
+}
 
 a:active {
 	color: #5EB3FF;
 	text-decoration: none;
-} /* selected link */
+}
 
+input[type="text"] {
+	border: 1px solid #676768;
+	min-width: 400px;
+	min-height: 40px;
+	text-align: center;
+	font-weight: lighter;
+}
+
+input[type="text"]:focus {
+	border: 1px solid #5EB3FF;
+}
+
+input[type=submit] {
+	background-color: #5EB3FF;
+	color: #fff;
+	border: none;
+	padding: 5px;
+	min-width: 100px;
+	min-height: 40px;
+}
 
 /*
 * World
@@ -98,10 +118,14 @@ a:active {
 }
 
 .margin-right-50 {
-	margin-right: 50px;
+	margin-right: 1.5em;
 }
 
 .image-center {
 	margin: auto;
 	display: block;
+}
+
+.text-blue {
+	color: #5EB3FF;
 }

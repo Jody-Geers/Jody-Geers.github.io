@@ -24,28 +24,35 @@
 	
 	<!-- Pages -->
 	<div id="impress">
-		<div id="Home" class="step" data-x="-1000" data-y="-1000" data-z="-1000">
+		<div id="Home" class="step" data-x="0" data-y="0" data-z="0">
 		</div>
 		
-		<div id="About" class="step jjg-step" data-x="0" data-y="0" data-z="0" data-rotate="360" data-scale="5">
+		<div id="About" class="step jjg-step" data-x="5000" data-y="5000" data-z="5000" data-rotate="360" data-scale="5">
 			<img src="bin/geers/logo.png" class="image-center" />
 			<h1>About Us</h1>
 			<span class="jjg-step-text">
                 Market presence ensures not only brand recognition but encourages the consumer decision making process in your company’s favour. We offer innovative marketing, promotion and sales strategies to drive your company’s name into the limelight and once there, with our services, you’ll look the part!<br/>
                 <br/>
-                Media – The medium is fully customisable to your needs, whether it is formal black a white printed on newspaper, high gloss vibrant colour brochures, to eye catching promotional videos we can strategize the best affordable marketing material for your needs.<br/>
+                <span class="text-blue">Media</span> The medium is fully customisable to your needs, whether it is formal black a white printed on newspaper, high gloss vibrant colour brochures, to eye catching promotional videos we can strategize the best affordable marketing material for your needs.<br/>
                 <br/>
-                Design – Frist impressions are important, don’t let your graphic design loose your company the sale. Need a logo, wanting to rebrand and reinvent yourself or simply want something new, we will work with you to get the right graphic design suited to your company.<br/>
+                <span class="text-blue">Design</span> Frist impressions are important, don’t let your graphic design loose your company the sale. Need a logo, wanting to rebrand and reinvent yourself or simply want something new, we will work with you to get the right graphic design suited to your company.<br/>
                 <br/>
-                Web – We offer beautiful web sites to ensure your client perceives your company’s devotion to high quality aesthetics with functional ergonomics that match. We are able to create suited web applications to aid the everyday internal running of your company ensuring more efficient practice.
+                <span class="text-blue">Web</span> We offer beautiful web sites to ensure your client perceives your company’s devotion to high quality aesthetics with functional ergonomics that match. We are able to create suited web applications to aid the everyday internal running of your company ensuring more efficient practice.
 			</span>
 		</div>
 		
-		<div id="Contact" class="step jjg-step" data-x="10000" data-y="10000" data-z="10000" data-rotate="720" data-scale="10">
+		<div id="Contact" class="step jjg-step" data-x="10000" data-y="30000" data-z="10000" data-rotate="720" data-scale="10">
 			<h1>Contact Us</h1>
 			<span class="jjg-step-text">
 				Do you have a query, proposition, something interesting to lighten up Monday?<br/>
-				Then please, don�t be shy, share below!<br/>
+				Then please, don't be shy, share below!<br/>
+				<br/>
+				<form method="post" action="api/contact/Contact.php">
+					<input type="text" name="name" value="name or company" onclick="clearValue(this);" /><br/>
+					<input type="text" name="email" value="email" onclick="clearValue(this);" /><br/>
+					<input type="text" name="info" value="further information" onclick="clearValue(this);" /><br/>
+					<input type="submit" value="Submit">
+				</form>
 			</span>
 		</div>
 	</div>
@@ -58,6 +65,16 @@
 			<a href="#Contact">Contact</a>
 		</div>
 	</div>
+	
+	<!-- UI El behaviour init -->
+	<script>
+		/*
+		* clears textbox value
+		*/
+		function clearValue (el) {
+			el.value = "";
+		}
+	</script>
 	
 	<!-- Pages init -->
 	<script src="lib/impress.js"></script>
