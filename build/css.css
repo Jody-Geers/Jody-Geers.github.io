@@ -111,6 +111,19 @@ input[type=submit] {
 
 
 /*
+* Helper overlay
+*/
+#helper {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	padding: 3px;
+	background-color: #fff;
+	color: #333;
+}
+
+
+/*
 * Element helpers
 */
 .display-none {
