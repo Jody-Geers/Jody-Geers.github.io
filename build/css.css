@@ -104,6 +104,10 @@ input[type=submit] {
 	-khtml-border-radius: 20px;
 }
 
+.jjg-step-image {
+	max-width: 600px;
+}
+
 .jjg-step-text {
 	color: #676768;
 	font-size: 1em;
