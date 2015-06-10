@@ -144,6 +144,10 @@ input[type=submit] {
 	display: block;
 }
 
+.text-center {
+	text-align: center;
+}
+
 .text-blue {
 	color: #5EB3FF;
 }
